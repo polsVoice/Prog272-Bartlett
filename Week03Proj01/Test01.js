@@ -1,5 +1,5 @@
 describe("A suite", function() {
-  it("contains spec with an expectation", function() {
-    expect(true).toBe(true);
+  it("expects to get 9", function() {
+    expect(getNine()).toBe(9);
   });
 });
