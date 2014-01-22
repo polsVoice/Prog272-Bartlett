@@ -2,7 +2,7 @@
  * @author Brent Bartlett
  */
 
-var numGetter = {
+var numberGetter = {
 	getNine: function(){
 	  return 9;
 	},
