@@ -9,3 +9,5 @@ var foo = {
 		console.log( 'func called' );
 	}
 };
+
+foo.func();
