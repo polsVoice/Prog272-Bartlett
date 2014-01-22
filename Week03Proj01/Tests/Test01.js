@@ -7,3 +7,4 @@ describe("Elvenware Jasmine One Suite", function() {
 	  expect( numGetter.getEight() ).toBe( 8 );
   });
 });
+//
