@@ -2,10 +2,11 @@
  * @author Brent Bartlett
  */
 
-var numberGetter = {
+var numGetter = {
 	getNine: function(){
-	return 9;
+	  return 9;
 	},
+
 	getEight: function(){
 		return 8;
 	}
