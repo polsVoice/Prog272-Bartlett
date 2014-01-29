@@ -1,9 +1,11 @@
 describe( "floofy nougat", function(){
-	it( "expects 32 to be 32", function(){
-		expect( converter.fToCelsiusConverter() ).toBe( 32 );
+	it( "expects 16 degrees Fahrenheit to be -8.88 degrees Celsius", function(){
+		expect( converter.fToCelsiusConverter() ).toBeCloseTo( -8.88, 1 );
 	});
-	it( "expects 145 to be 145", function(){
-		expect( converter.milesToKM() ).toBe( 144 );
+	it( "expects 16 miles to be 25.6 km", function(){
+		expect( converter.milesToKM() ).toBe( 25.6 );
 	});
-	//alert( converter.milesToKM() );
+	it( "expects sqrt of 16 to be 4", function(){
+		expect( converter.squareRoot() ).toBe( 4 );
+	});
 });
