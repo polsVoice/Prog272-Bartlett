@@ -24,27 +24,25 @@
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="shortcut icon" type="image/png" href="js/jasmine/jasmine_favicon.png">
+        <link rel="stylesheet" type="text/css" href="js/jasmine/jasmine.css">
+        <script type="text/javascript" src="js/jasmine/console.js"></script>
+        <script type="text/javascript" src="js/jasmine/jasmine.js"></script>
+        <script type="text/javascript" src="js/jasmine/jasmine-html.js"></script>
+        <script type="text/javascript" src="js/jasmine/boot.js"></script>
         <title>Hello World</title>
-        <link rel="shortcut icon" type="image/png" href="jasmine/jasmine_favicon.png">
-  		<link rel="stylesheet" type="text/css" href="jasmine/jasmine.css">
     </head>
     <body>
         <div class="app">
-        	<div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-       		<input type="text" id="inputBox" />
-			<button type="button" id="fToCelsius">Convert to Celsius</button>
-			<button type="button" id="milesToKM" >Convert to Kilometers</button>
-			<button type="button" id="squareRoot" >Find Square Root</button>
-			<h1 id="headline">Jelly</h1>
+            <h1>Brent Bartlett</h1>
+				<input type="text" id="inputBox" />
+				<button type="button" id="fToCelsius">Convert to Celsius</button>
+				<button type="button" id="milesToKM">Convert to Kilometers</button>
+				<button type="button" id="squareRoot">Find Square Root</button>
+				<h1 id="headline">Jelly</h1>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
-        <script src="jasmine/jasmine.js"></script>
-  		<script src="jasmine/jasmine-html.js"></script>
-  		<script src="jasmine/boot.js"></script>
-  		<script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/test.js"></script>
         <script type="text/javascript">
             app.initialize();

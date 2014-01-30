@@ -1,3 +1,5 @@
+console.log( "Jasmine loaded?" );
+
 describe( "floofy nougat", function(){
 	it( "expects 16 degrees Fahrenheit to be -8.88 degrees Celsius", function(){
 		expect( converter.fToCelsiusConverter() ).toBeCloseTo( -8.88, 1 );
@@ -9,3 +11,4 @@ describe( "floofy nougat", function(){
 		expect( converter.squareRoot() ).toBe( 4 );
 	});
 });
+console.log( "Jasmine loaded?" );

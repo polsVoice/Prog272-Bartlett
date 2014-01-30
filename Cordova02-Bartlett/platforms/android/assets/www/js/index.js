@@ -51,11 +51,11 @@ var app = {
 var converter = {
 		num: 16,
 		init: function(){
-			// $( "#fToCelsius" ).click( converter.fToCelsiusConverter );
+			//$( "#fToCelsius" ).click( converter.fToCelsiusConverter );
+			alert( "Squirrels!" );
 		},
 		fToCelsiusConverter: function(){
-			/*var input = $( "#inputBox" ).val(); */
-			
+			//var input = $( "#inputBox" ).val();
 			var celsius;
 			celsius = ( converter.num - 32 ) * ( 5 / 9 );
 			return celsius;
@@ -70,4 +70,4 @@ var converter = {
 			return Math.sqrt( converter.num );
 		}
 	};
-	converter.init();
+converter.init();
