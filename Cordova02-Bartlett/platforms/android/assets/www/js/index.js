@@ -52,7 +52,6 @@ var converter = {
 		num: 16,
 		init: function(){
 			//$( "#fToCelsius" ).click( converter.fToCelsiusConverter );
-			alert( "Squirrels!" );
 		},
 		fToCelsiusConverter: function(){
 			//var input = $( "#inputBox" ).val();
