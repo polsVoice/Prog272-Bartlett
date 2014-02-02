@@ -23,18 +23,22 @@ input
 {
 	display: block;
 	position: absolute;
-	margin: 20% 0 0 30%;
 	font-size: 16pt;
-	
+	margin: 0 auto;
 }
 
 button
 {
-	padding: 1%;
-	margin: 40% 0 0 10%;
 	font-family: 'Alef', sans-serif;
 	color: white;
 	background-color: #0769AD;
-	float: left;
 	border-radius: 20px;
+	padding: 1%;
+	margin-top: 3.5em;
+	float: left;
+}
+
+#panel
+{
+	margin: 0 auto;
 }
