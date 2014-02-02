@@ -22,9 +22,9 @@ p
 input
 {
 	display: block;
-	position: absolute;
 	font-size: 16pt;
-	margin: 0 auto;
+	position: absolute;
+	margin-top: 10%;
 }
 
 button
@@ -33,12 +33,13 @@ button
 	color: white;
 	background-color: #0769AD;
 	border-radius: 20px;
-	padding: 1%;
+	display: block;
+	padding: 5%;
 	margin-top: 3.5em;
-	float: left;
 }
 
 #panel
 {
-	margin: 0 auto;
+	position: absolute;
+	margin-top: 10em;
 }
