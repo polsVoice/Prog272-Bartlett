@@ -1,72 +1,68 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-var app = {
-    // Application Constructor
-    initialize: function() {
-        this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicity call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
-    }
-};
-
 var converter = {
-		num: 16,
+		num: 0,
 		init: function(){
-			//$( "#fToCelsius" ).click( converter.fToCelsiusConverter );
+			$( "button" ).click( converter.clickHandler );
 		},
-		fToCelsiusConverter: function(){
-			//var input = $( "#inputBox" ).val();
+		clickHandler: function(){
+			//send button identifier
+			converter.resultSetter( this.id );
+		},
+		resultSetter: function( switcher ){
+			var num = $( "#inputBox" ).get( 0 ).value;
+			var result = 0;
+			
+			if( isNaN( num ) || num.length === 0 )
+			{
+				$( "#answer" ).html( "Invalid input! Try again" );
+				converter.reset();
+			}
+			else
+			{
+			// determine result based upon which button was pressed
+				switch( switcher )
+				{
+					case "fToCelsius":
+						result = converter.resultRound( converter.fToCelsius( num ) );
+						$( "#answer" ).html( num + " &deg; Fahrenheit = " + result + " &deg; Celsius" );
+						converter.reset();
+						break;
+					case "milesToKM":
+						result = converter.resultRound( converter.milesToKM( num ) );
+						$( "#answer" ).html( num + " miles = " + result + " km" );
+						converter.reset();
+						break;
+					case "squareRoot":
+						result = converter.resultRound( converter.squareRoot( num ) );
+						$( "#answer" ).html( "The square root of " + num + " is " + result );
+						converter.reset();
+						break;
+					default:
+						$( "#answer" ).html( "Invalid input! Try again" );
+						converter.reset();
+				}
+			}
+		},
+		reset: function(){
+			var inputBox = $( "#inputBox" ).get( 0 );
+			inputBox.value = "";
+			inputBox.focus();
+		},
+		resultRound: function( result ){
+			// rounds to 2 decimal places
+			return Math.round( ( result + 0.00001 ) * 100 ) / 100;
+		},
+		fToCelsius: function( inputNum ){
 			var celsius;
-			celsius = ( converter.num - 32 ) * ( 5 / 9 );
+			celsius = ( inputNum - 32 ) * ( 5 / 9 );
 			return celsius;
-			//alert( "Your number was " + input );
 		},
-		milesToKM: function(){
+		milesToKM: function( inputNum ){
 			var kilometers;
-			kilometers = converter.num * 1.6;
+			kilometers = inputNum * 1.6;
 			return kilometers;
 		},
-		squareRoot: function(){
-			return Math.sqrt( converter.num );
+		squareRoot: function( inputNum ){
+			return Math.sqrt( inputNum );
 		}
 	};
 converter.init();
