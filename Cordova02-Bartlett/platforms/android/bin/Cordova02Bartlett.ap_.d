@@ -1,0 +1,25 @@
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/bin/Cordova02Bartlett.ap_ \
+ : /home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/res/xml/config.xml \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/res/drawable-ldpi/icon.png \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/res/drawable-hdpi/icon.png \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/res/values/strings.xml \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/res/drawable/icon.png \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/res/drawable-mdpi/icon.png \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/res/drawable-xhdpi/icon.png \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/bin/res/drawable-ldpi/icon.png \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/bin/res/drawable-hdpi/icon.png \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/bin/res/drawable/icon.png \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/bin/res/drawable-mdpi/icon.png \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/bin/res/drawable-xhdpi/icon.png \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/assets/www \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/assets/www/cordova_plugins.js \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/assets/www/css \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/assets/www/cordova.js \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/assets/www/index.html \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/assets/www/config.xml \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/assets/www/js \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/assets/www/img \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/assets/www/css/index.css \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/assets/www/js/index.js \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/assets/www/img/logo.png \
+/home/deuce/dev/Prog272-Bartlett/Cordova02-Bartlett/platforms/android/bin/AndroidManifest.xml \
