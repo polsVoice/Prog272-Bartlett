@@ -38,7 +38,8 @@ button
 
 #answer
 {
-	font-size: 1.5em;
+	font-size: 1.25em;
+	padding-bottom: 2%;
 }
 
 #panel
@@ -53,8 +54,7 @@ button
     left:50%;
     top: 25%;
     height:50px;                   /* text area height */
-    width:225px;                   /* text area width */
-    text-align:center;
+    width: 300px;                   /* text area width */
     padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
     margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
                                    /* offset horizontal: half of text area width */
