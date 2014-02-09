@@ -9,38 +9,26 @@ var textLoader = {
 		switch( buttonId )
 		{
 			case "buttonHtml01":
-				$( "#div01" ).load( "Sources.html #paragraph02", function() {
-					console.log( "Load was performed." );
-				});
+				textLoader.loadFile( "Sources.html #paragraph01" );
 				break;
 			case "buttonHtml02":
-				$( "#div01" ).load( "Sources.html #paragraph02", function() {
-					console.log( "Load was performed." );
-				});
+				textLoader.loadFile( "Sources.html #paragraph02" );
 				break;
 			case "buttonHtml03":
-				$( "#div01" ).load( "Sources.html #paragraph03", function() {
-					console.log( "Load was performed." );
-				});
+				textLoader.loadFile( "Sources.html #paragraph03" );
 				break;
 			default:
+				$( "#div01" ).html( "<p>Source not found.</p>" );
 				break;
 		}
 	},
 	loadFile: function( file )
 	{
-		var loaded;
-		$( "#div01" ).load( file, function( response, status, xhr ){
-			if( status === "error" ){
-				loaded = false;
-			}
-			else
-			{
-				loaded = true;
-			}
+		var loaded = false;
+		$( "#div01" ).load( file, { param: true }, function( data ) {
+			loaded = true;
+			console.log( loaded );
 		} );
-		console.log( loaded );
-		return loaded;
 	}
 };
 textLoader.init();
