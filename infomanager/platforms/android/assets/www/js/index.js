@@ -24,10 +24,8 @@ var textLoader = {
 	},
 	loadFile: function( file )
 	{
-		var loaded = false;
-		$( "#div01" ).load( file, { param: true }, function( data ) {
-			loaded = true;
-			console.log( loaded );
+		$( "#div01" ).load( file, function() {
+			console.log( "File was loaded." );
 		} );
 	}
 };
