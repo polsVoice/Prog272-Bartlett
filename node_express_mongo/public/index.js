@@ -13,9 +13,9 @@ var dataDisplay = {
 		var field3 = $( "#line3" );
 		$.getJSON( '/read', function( data ){
 			theData = data[ num ];
-			field1.html( theData[ "firstName" ] + " " + theData[ "lastName" ] );
-			field2.html( theData[ "address" ] );
-			field3.html( theData[ "city" ] + " " + theData[ "state" ] + " " + theData[ "zip" ] );
+			field1.html( theData.firstName + " " + theData.lastName );
+			field2.html( theData.address );
+			field3.html( theData.city + " " + theData.state + " " + theData.zip );
 		} );
 	}
 };
