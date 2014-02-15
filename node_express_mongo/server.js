@@ -9,30 +9,33 @@ var url02 = 'mongodb://192.168.2.19:27017/test';
 
 MongoClient.connect( url01, function( err, db ){
 	var collection = db.collection( "test_insert" );
-	
-	var theArray = [];
-	
-	for( var i = 10000; i < 10250; i++ )
-	{
-		var obj = {
-			"firstName": "Bob" + i,
-			"lastName": "Dobbs" + i,
-			"address": i + " Fedora Lane",
-			"city": "Bellevue",
-			"state": "WA",
-			"zip": "98002"
-		};
-		theArray.push( obj ); 
-	}
-	
-	collection.insert( theArray, function( err, docs ){
-			collection.count( function( err, count ){
-				console.log( format( "count = %s", count ) );
-			} );
-			collection.find().toArray( function( err, results ){
-				console.dir( results );
-				db.close();
-			} );
+	collection.count( function( err, count ){
+		if( !err && count === 0 ){
+			var theArray = [];
+			console.log( collection.count );
+			for( var i = 10000; i < 10250; i++ )
+			{
+				var obj = {
+					"firstName": "Bob" + i,
+					"lastName": "Dobbs" + i,
+					"address": i + " Fedora Lane",
+					"city": "Bellevue",
+					"state": "WA",
+					"zip": "98002"
+				};
+				theArray.push( obj ); 
+			}
+			
+			collection.insert( theArray, function( err, docs ){
+					collection.count( function( err, count ){
+						console.log( format( "count = %s", count ) );
+					} );
+					collection.find().toArray( function( err, results ){
+						console.dir( results );
+						db.close();
+					} );
+				} );
+			}
 		} );
 } );
 

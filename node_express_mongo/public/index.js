@@ -15,6 +15,15 @@ $( document ).ready( function(){
 var dataDisplay = {
 	init: function(){
 		$( "#showButton" ).on( "click", dataDisplay.showRecord );
+		var field1 = $( "#line1" );
+		var field2 = $( "#line2" );
+		var field3 = $( "#line3" );
+		$.getJSON( '/read', function( data ){
+			theData = data[ 0 ];
+			field1.html( theData[ "firstName" ] + " " + theData[ "lastName" ] );
+			field2.html( theData[ "address" ] );
+			field3.html( theData[ "city" ] + " " + theData[ "state" ] + " " + theData[ "zip" ] );
+		} );
 	},
 	showRecord: function(){
 		var value = $( "#userInput" ).val();
