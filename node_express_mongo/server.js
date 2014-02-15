@@ -10,7 +10,7 @@ var url02 = 'mongodb://192.168.2.19:27017/test';
 MongoClient.connect( url01, function( err, db ){
 	var collection = db.collection( "test_insert" );
 	collection.count( function( err, count ){
-		if( !err && count === 0 ){
+		if( !err && count < 250 ){
 			var theArray = [];
 			console.log( collection.count );
 			for( var i = 10000; i < 10250; i++ )
