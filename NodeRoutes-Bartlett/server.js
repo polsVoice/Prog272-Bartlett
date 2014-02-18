@@ -12,6 +12,12 @@ app.get( "/printFtInMiles", function( request, response ){
 	response.send( ftInMilesMod.feetInMile() );
 } );
 
+app.get( "/calcFtInMile", function( request, response ){
+	var miles = parseInt( request.query.miles );
+	var result = ftInMilesMod.calcFeetInMiles( miles );
+	response.send( { "result": result } );
+} );
+
 /*
 // With a get, the parameters are passed in request.query
 app.get('/add', function(request, response) {
