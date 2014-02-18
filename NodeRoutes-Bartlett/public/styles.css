@@ -9,6 +9,7 @@ button
 {
 	display: block;
 	margin-top: 2%;
+	padding: .25em;
 }
 
 input
@@ -19,6 +20,9 @@ input
 #feetInMile
 {
 	height: 1.5em;
+	border: 1px solid black;
+	width: 30%;
+	padding: 1%;
 }
 
 #numfeet
