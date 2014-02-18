@@ -1,1 +1,10 @@
+button
+{
+	display: block;
+	margin-top: 2%;
+}
 
+#feetInMile
+{
+	height: 2em;
+}
