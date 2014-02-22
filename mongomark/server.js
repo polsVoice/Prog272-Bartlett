@@ -13,9 +13,9 @@ app.get( "/generate", function(){
 } );
 
 app.get( "/read", function( request, response ){
-	//~ var query = new createJSON.QueryMongo();
-	//~ var data = query.getData( response );
-	
+	var theFile = "output.html";
+	var contents = fs.readFileSync( theFile, "utf8" );
+	response.send( { "result": contents } );
 } );
 
 app.get( "/", function( request, result ){
