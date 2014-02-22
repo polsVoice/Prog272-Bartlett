@@ -7,9 +7,15 @@ app.get( "/insert", function(){
 	createJSON.insertData();
 } );
 
+app.get( "/generate", function(){
+	console.log( "in /generate" );
+	createJSON.generateHTML();
+} );
+
 app.get( "/read", function( request, response ){
-	var query = new createJSON.QueryMongo();
-	var data = query.getData( response );
+	//~ var query = new createJSON.QueryMongo();
+	//~ var data = query.getData( response );
+	
 } );
 
 app.get( "/", function( request, result ){
