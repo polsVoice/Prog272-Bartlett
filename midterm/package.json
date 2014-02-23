@@ -1,6 +1,6 @@
 {
-    "name": "mongomark",
-    "version": "0.5",
+	"name": "Midterm",
+	"version": "0.0.1",
     "private": true,
     "scripts": {
         "start": "nodejs server.js"
