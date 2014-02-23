@@ -1,6 +1,7 @@
 var mongoMark = {
 	init: function(){
 		$( "#inputData" ).on( "click", mongoMark.readMarkdown );
+		$( "#outputData" ).on( "click", mongoMark.generateHTML );
 		$( "input:radio" ).on( "click", mongoMark.showSection );
 	},
 	readMarkdown: function(){
@@ -11,7 +12,8 @@ var mongoMark = {
 			console.dir( data );
 		} );
 		$( "#message" ).html( "Read in markdown file." )
-
+	},
+	generateHTML: function(){
 		// generate HTML file from database
 		console.log( "generateHTML button clicked" );
 		$.get( "/generate" );

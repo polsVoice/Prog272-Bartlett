@@ -1,3 +1,10 @@
+@import url( http://fonts.googleapis.com/css?family=Varela+Round );
+
+*
+{
+	font-family: 'Varela Round', sans-serif;
+}
+
 h1, div > p
 {
 	display: none;
