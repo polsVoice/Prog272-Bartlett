@@ -27,7 +27,10 @@ var mongoMark = {
 	showSection: function(){
 		if( $( this ).is( ":checked" ) )
 		{
-			$( "#output" ).css( "display", "block" );
+			$( "#output *" ).css( "display", "none" );
+			var theId = "#" + $( this ).val();
+			console.log( theId );
+			$( "#output > " + theId + ", " + theId + " + p" ).css( "display", "block" );
 		}
 	}
 };
