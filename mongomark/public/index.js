@@ -2,7 +2,6 @@ var mongoMark = {
 	init: function(){
 		$( "#inputData" ).on( "click", mongoMark.readMarkdown );
 		$( "#outputData" ).on( "click", mongoMark.generateHTML );
-		$( "input:radio" ).on( "click", mongoMark.showSection );
 	},
 	readMarkdown: function(){
 		
@@ -21,8 +20,8 @@ var mongoMark = {
 		
 		// read HTML file back from server
 		$.get( "/read", function( data ){
-			console.log( "inside printHTML" );
 			$( "#output" ).html( data.result );
+			mongoMark.createList();
 			$( "#message" ).append( "<br />Please make a selection below." );
 			} );
 	},
@@ -34,10 +33,22 @@ var mongoMark = {
 			// get the value of the button, which matches the ids of the h1s
 			// and format for CSS
 			var theId = "#" + $( this ).val();
-			console.log( theId );
 			// select the h1 and the p following it
 			$( theId + ", " + theId + " + p" ).css( "display", "block" );
 		}
+	},
+	createList: function(){
+		var headers = $( "h1" );
+		var theForm = document.createElement( "form" );
+		for( var i = 0, ii = headers.length; i < ii; i++ )
+		{
+			var theValue = $( headers[ i ] ).attr( "id" );
+			var valCapitalized = theValue.charAt( 0 ).toUpperCase() + theValue.substring( 1 );
+			var theInput = $( "<input type='radio' name='animal' value='" + theValue + "' />" + valCapitalized + "<br />" );
+			$( theForm ).append( theInput );
+		}
+		$( "hr" ).after( theForm );
+		$( "input:radio" ).on( "click", mongoMark.showSection );
 	}
 };
 mongoMark.init();
