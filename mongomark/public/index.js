@@ -4,18 +4,20 @@ var mongoMark = {
 		$( "input:radio" ).on( "click", mongoMark.showSection );
 	},
 	readMarkdown: function(){
+		
+		// insert Markdown file into database
 		$.getJSON( "/insert", function( data ){
 			console.log( "In getJSON()" );
 			console.dir( data );
 		} );
 		$( "#message" ).html( "Read in markdown file." )
-	//},
-	//generateHTML: function(){
+
+		// generate HTML file from database
 		console.log( "generateHTML button clicked" );
 		$.get( "/generate" );
 		$( "#message" ).append( "<br />HTML file has been generated." );
-	//},
-	//printHTML: function(){
+		
+		// read HTML file back from server
 		$.get( "/read", function( data ){
 			console.log( "inside printHTML" );
 			$( "#output" ).html( data.result );
@@ -31,7 +33,7 @@ var mongoMark = {
 			// and format for CSS
 			var theId = "#" + $( this ).val();
 			console.log( theId );
-			// select the 
+			// select the h1 and the p following it
 			$( theId + ", " + theId + " + p" ).css( "display", "block" );
 		}
 	}
