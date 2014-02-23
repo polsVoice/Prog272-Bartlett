@@ -3,6 +3,7 @@ var mongoMark = {
 		$( "#inputData" ).on( "click", mongoMark.readMarkdown );
 		$( "#genHTML" ).on( "click", mongoMark.generateHTML );
 		$( "#printHTML" ).on( "click", mongoMark.printHTML );
+		$( "input:radio" ).on( "click", mongoMark.showSection );
 	},
 	readMarkdown: function(){
 		//console.log( "readMarkdown button clicked" );
@@ -20,6 +21,12 @@ var mongoMark = {
 			console.log( "inside printHTML" );
 			$( "#output" ).html( data.result );
 			} );
+	},
+	showSection: function(){
+		if( $( this ).is( ":checked" ) )
+		{
+			$( "#output" ).css( "display", "block" );
 		}
+	}
 };
 mongoMark.init();
