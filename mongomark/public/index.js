@@ -6,7 +6,7 @@ var mongoMark = {
 		$( "input:radio" ).on( "click", mongoMark.showSection );
 	},
 	readMarkdown: function(){
-		//console.log( "readMarkdown button clicked" );
+		console.log( "readMarkdown button clicked" );
 		$.getJSON( "/insert", function( data ){
 			console.log( "In getJSON()" );
 			console.dir( data );
@@ -27,10 +27,14 @@ var mongoMark = {
 	showSection: function(){
 		if( $( this ).is( ":checked" ) )
 		{
+			// reset all of the div elements
 			$( "#output *" ).css( "display", "none" );
+			// get the value of the button, which matches the ids of the h1s
+			// and format for CSS
 			var theId = "#" + $( this ).val();
 			console.log( theId );
-			$( "#output > " + theId + ", " + theId + " + p" ).css( "display", "block" );
+			// select the 
+			$( theId + ", " + theId + " + p" ).css( "display", "block" );
 		}
 	}
 };
