@@ -39,7 +39,7 @@ var generateHTML = function(){
 			db.close();
 		} );
 	} );
-	exec( "pandoc -t html5 -o output.html sample.md", function( request, response ){
+	exec( "pandoc -t html5 -o output.html output.md", function( request, response ){
 			console.log( "Success! File output.html was generated" );
 	} );
 };
