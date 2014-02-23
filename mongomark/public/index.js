@@ -10,7 +10,7 @@ var mongoMark = {
 			console.log( "In getJSON()" );
 			console.dir( data );
 		} );
-		$( "#message" ).html( "Read in markdown file." )
+		$( "#message" ).html( "Read in markdown file." );
 	},
 	generateHTML: function(){
 		// generate HTML file from database

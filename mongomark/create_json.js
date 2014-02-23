@@ -11,19 +11,23 @@ var insertData = function(){
 		MongoClient.connect( url01, function( err, db ){
 		var collection = db.collection( "test_insert" );
 		console.log( "Connection made" );
-		var markdown = fs.readFileSync( "sample.md", "utf8" );
-		var data = {
-			"title": "sample.md",
-			"markdown": markdown
-		};
-		
-		collection.insert( data, function( err, docs ){
-			collection.find().toArray( function( err, results ){
-				console.dir( results );
-				db.close();
-			} );
+                collection.count( function( err, count ){
+                    if( !err && count === 0 ){
+                        var markdown = fs.readFileSync( "sample.md", "utf8" );
+                        var data = {
+                            "title": "sample.md",
+                            "markdown": markdown
+                        };
+
+                        collection.insert( data, function( err, docs ){
+                            collection.find().toArray( function( err, results ){
+                                console.dir( results );
+                                db.close();
+							} );
+						} );
+					}
+				} );
 		} );
-	} );
 };
 
 var generateHTML = function(){
