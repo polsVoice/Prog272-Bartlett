@@ -15,11 +15,13 @@ var mongoMark = {
 	generateHTML: function(){
 		console.log( "generateHTML button clicked" );
 		$.get( "/generate" );
+		$( "#message" ).html( "HTML file has been generated." );
 	},
 	printHTML: function(){
 		$.get( "/read", function( data ){
 			console.log( "inside printHTML" );
 			$( "#output" ).html( data.result );
+			$( "#message" ).html( "Please make a selection below." );
 			} );
 	},
 	showSection: function(){
