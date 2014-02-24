@@ -23,24 +23,40 @@ var insertData = function(){
 					console.dir( results );
 					//db.close();
 				} );
-				populateMenu( collection );
 			} );
 		}
 	} );
 };
 
-var populateMenu = function( collection ){
-	collection.find().toArray( function( err, results){
-		if( err ) console.dir( err );
-		var titleArray = [];
-		for( var i = 0, ii = results.length; i < ii; i++ )
-		{
-			titleArray[ i ] = results[ i ].title;
-			console.log( titleArray[ i ] );
-		}
-	} );
-};
 
 insertData();
+
+app.get( "/titleArray", function( request, response ){
+	MongoClient.connect( url01, function( err, db ){
+		if( err ) throw err;
+		else{
+			var collection = db.collection( "test_insert" );
+			collection.find().toArray( function( err, results){
+				if( err ) console.dir( err );
+				var titleArray = [];
+				for( var i = 0, ii = results.length; i < ii; i++ )
+				{
+					titleArray[ i ] = results[ i ].title;
+				}
+				response.send( { "result": titleArray } );
+			} );
+		}
+	} );
+} );
+
+app.get( "/", function( request, result ){
+	var html = fs.readFileSync( __dirname + "/public/index.html" );
+	result.writeHeader( 200, { "Content-Type": "text/html" } );
+	result.write( html );
+	result.end();
+} );
+
+app.use( "/", express.static( __dirname + "/public/" ) );
+
 app.listen( port );
 console.log( "Listening on port: " + port );

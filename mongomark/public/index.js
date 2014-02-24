@@ -43,10 +43,15 @@ var mongoMark = {
 		for( var i = 0, ii = headers.length; i < ii; i++ )
 		{
 			var theValue = $( headers[ i ] ).attr( "id" );
+			
+			// capitalize value
 			var valCapitalized = theValue.charAt( 0 ).toUpperCase() + theValue.substring( 1 );
+			
+			// create radio button
 			var theInput = $( "<input type='radio' name='animal' value='" + theValue + "' />" + valCapitalized + "<br />" );
 			$( theForm ).append( theInput );
 		}
+		// insert form after hr
 		$( "hr" ).after( theForm );
 		$( "input:radio" ).on( "click", mongoMark.showSection );
 	}
