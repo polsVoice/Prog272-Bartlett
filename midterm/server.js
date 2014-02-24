@@ -8,7 +8,7 @@ var port = process.env.PORT || 30025;
 var url01 = "mongodb://127.0.0.1:27017/test";
 var url02 = "mongodb://192.168.2.19:27017/test";
 
-var insertData = function(){
+app.get( "/insertData", function(){
 	MongoClient.connect( url01, function( err, db ){
 		if( err ) throw err;
 		else
@@ -21,15 +21,12 @@ var insertData = function(){
 			collection.insert( jsonObject, function( err, docs ){
 				collection.find().toArray( function( err, results ){
 					console.dir( results );
-					//db.close();
+					db.close();
 				} );
 			} );
 		}
 	} );
-};
-
-
-insertData();
+} );
 
 app.get( "/titleArray", function( request, response ){
 	MongoClient.connect( url01, function( err, db ){
@@ -47,6 +44,15 @@ app.get( "/titleArray", function( request, response ){
 			} );
 		}
 	} );
+} );
+
+app.get( "/getPoem", function( request, result ){
+	MongoClient.connect( url01, function( err, db ){
+		if( err ) throw err;
+		else{
+			var collection = db.collection( "test_insert" );
+			collection.findOne( { 
+		}
 } );
 
 app.get( "/", function( request, result ){
