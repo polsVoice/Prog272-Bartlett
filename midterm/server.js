@@ -46,13 +46,23 @@ app.get( "/titleArray", function( request, response ){
 	} );
 } );
 
-app.get( "/getPoem", function( request, result ){
+app.get( "/getPoem", function( request, response ){
 	MongoClient.connect( url01, function( err, db ){
-		if( err ) throw err;
-		else{
+		if( err ) console.dir( err );
+		else {
 			var collection = db.collection( "test_insert" );
-			collection.findOne( { 
+			var title = request.query.title;
+			collection.find( { "title": title }, { "content": 1, "_id": 0 } )
+				.toArray( function( err, result ){
+					if( err )
+					{
+						console.dir( err );
+					}
+					console.dir( result );
+					response.send( { "result": result } );
+				} );
 		}
+	} );
 } );
 
 app.get( "/", function( request, result ){
