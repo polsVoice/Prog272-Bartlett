@@ -28,15 +28,16 @@ var midTerm = {
 			$( "p" ).after( menu );
 		} );
 	},
-	displayPoem: function( title ){
+	displayPoem: function( title )
+	{
 		console.log( title );
-		$.getJSON( "/getPoem", function( data ){
+		/*$.getJSON( "/getPoem", function( data ){
 			console.log( data.result );
 			//var poem = JSON.stringify( data.result );
 			//console.log( poem.content );
 		} );
-	}
-		/*$.ajax( {
+		*/
+		$.ajax( {
 			url: "/getPoem",
 			type: "GET",
 			data: {
@@ -45,10 +46,9 @@ var midTerm = {
 			datatype: "json",
 			success: function( data ){
 				//var thePoem = $.parseJSON( data.result );
-				var poem = data.result;
-				console.log( poem.content );
-				//console.log( thePoem.content );
-				//$( "#output" ).html( thePoem.content );
+				console.log( data );
+				
+				$( "#output" ).html( data.result );
 			},
 			error: function( jqxhr, status, errorThrown ){
 				console.log( jqxhr.responseText );
@@ -56,6 +56,7 @@ var midTerm = {
 				console.log( errorThrown );
 			}
 		} );
-		*/
+
+	}
 };
 midTerm.init();

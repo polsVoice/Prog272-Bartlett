@@ -3,6 +3,7 @@ var app = express();
 var MongoClient = require( "mongodb" ).MongoClient;
 var fs = require( "fs" );
 
+//app.use( express.bodyParser() );
 var port = process.env.PORT || 30025;
 
 var url01 = "mongodb://127.0.0.1:27017/test";
@@ -46,23 +47,28 @@ app.get( "/titleArray", function( request, response ){
 	} );
 } );
 
-app.get( "/getPoem", function( request, response ){
-	MongoClient.connect( url01, function( err, db ){
+app.get( "/getPoem", function( request, response )
+{
+	MongoClient.connect( url01, function( err, db )
+	{
 		if( err ) console.dir( err );
-		else {
+		else 
+		{
 			var collection = db.collection( "test_insert" );
 			var title = request.query.title;
 			collection.find( { "title": title }, { "content": 1, "_id": 0 } )
-				.toArray( function( err, result ){
+				.toArray( function( err, result )
+				{
 					if( err )
 					{
 						console.dir( err );
 					}
 					console.dir( result );
-					response.send( { "result": result } );
+					var poem = JSON.stringify( result );
+					response.send( { "result": poem } );
 				} );
-		}
-	} );
+}
+} );
 } );
 
 app.get( "/", function( request, result ){
