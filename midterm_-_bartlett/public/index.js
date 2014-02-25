@@ -1,6 +1,14 @@
 var midTerm = {
 	init: function(){
 		$( "#inputFile" ).on( "click", midTerm.inputFile );
+		midTerm.createMenu();
+	},
+	inputFile: function(){
+		$.getJSON( "/insertData", function( data ){
+			console.dir( data );
+		} );
+	},
+	createMenu: function(){
 		$.getJSON( "/titleArray", function( data ){
 			console.log( "calling /titleArray" );
 			var titleArray = data.result;
@@ -13,30 +21,22 @@ var midTerm = {
 				var item = $( "<option value='" + titleArray[ i ] + "'>" + titleArray[ i ] + "</option>" );
 				$( menu ).append( item );
 			}
-				$( menu ).change( function(){
-					//console.log( $( this ).val() );
-					midTerm.displayPoem( $( this ).val() );
-				} );
-				$( "p" ).after( menu );
-		} );
-	},
-	inputFile: function(){
-		$.getJSON( "/insertData", function( data ){
-			console.dir( data );
+			$( menu ).change( function(){
+				//console.log( $( this ).val() );
+				midTerm.displayPoem( $( this ).val() );
+			} );
+			$( "p" ).after( menu );
 		} );
 	},
 	displayPoem: function( title ){
-		/*$.getJSON( "/getPoem", function( data ){
-			$( "#output" ).html( data.result );
-		} );
-		*/
 		console.log( title );
-		/*$.getJSON( "/getPoem", function( data ){
-			var content = data.result;
-			console.log( content );
+		$.getJSON( "/getPoem", function( data ){
+			console.log( data.result );
+			//var poem = JSON.stringify( data.result );
+			//console.log( poem.content );
 		} );
-		*/
-		$.ajax( {
+	}
+		/*$.ajax( {
 			url: "/getPoem",
 			type: "GET",
 			data: {
@@ -44,9 +44,11 @@ var midTerm = {
 			},
 			datatype: "json",
 			success: function( data ){
-				var thePoem = $.parseJSON( data.result );
-				$( "#output" ).html( thePoem.content );
-				console.log( data.result );
+				//var thePoem = $.parseJSON( data.result );
+				var poem = data.result;
+				console.log( poem.content );
+				//console.log( thePoem.content );
+				//$( "#output" ).html( thePoem.content );
 			},
 			error: function( jqxhr, status, errorThrown ){
 				console.log( jqxhr.responseText );
@@ -54,6 +56,6 @@ var midTerm = {
 				console.log( errorThrown );
 			}
 		} );
-	}
+		*/
 };
 midTerm.init();
