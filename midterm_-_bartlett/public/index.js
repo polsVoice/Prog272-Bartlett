@@ -45,10 +45,7 @@ var midTerm = {
 			},
 			datatype: "json",
 			success: function( data ){
-				//var thePoem = $.parseJSON( data.result );
-				console.log( data );
-				
-				$( "#output" ).html( data.result );
+				$( "#output" ).html( "<pre>" + data.result[ 0 ].content + "</pre>" );
 			},
 			error: function( jqxhr, status, errorThrown ){
 				console.log( jqxhr.responseText );

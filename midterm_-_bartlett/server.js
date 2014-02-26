@@ -64,8 +64,7 @@ app.get( "/getPoem", function( request, response )
 						console.dir( err );
 					}
 					console.dir( result );
-					var poem = JSON.stringify( result );
-					response.send( { "result": poem } );
+					response.send( { "result": result } );
 				} );
 }
 } );
