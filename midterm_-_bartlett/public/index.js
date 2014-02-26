@@ -25,18 +25,12 @@ var midTerm = {
 				//console.log( $( this ).val() );
 				midTerm.displayPoem( $( this ).val() );
 			} );
-			$( "p" ).after( menu );
+			$( "p" ).before( menu );
 		} );
 	},
 	displayPoem: function( title )
 	{
 		console.log( title );
-		/*$.getJSON( "/getPoem", function( data ){
-			console.log( data.result );
-			//var poem = JSON.stringify( data.result );
-			//console.log( poem.content );
-		} );
-		*/
 		$.ajax( {
 			url: "/getPoem",
 			type: "GET",
