@@ -1,31 +1,48 @@
 var midTerm = {
 	init: function(){
 		$( "#inputFile" ).on( "click", midTerm.inputFile );
-		midTerm.createMenu();
+		$( "#search" ).on( "click", midTerm.search );
+		midTerm.createMenu( "poem" );
 	},
 	inputFile: function(){
 		$.getJSON( "/insertData", function( data ){
 			console.dir( data );
 		} );
 	},
-	createMenu: function(){
-		$.getJSON( "/titleArray", function( data ){
-			console.log( "calling /titleArray" );
-			var titleArray = data.result;
-			titleArray = titleArray.sort();
-			var menu = document.createElement( "select" );
-			var menuHeader = $( "<option value='select'>Select Poem</option>" );
-			$( menu ).append( menuHeader );
-			for( var i = 0, ii = titleArray.length; i < ii; i++ )
+	createMenu: function( keyword )
+	{
+		$.ajax( {
+			url: "/titleArray",
+			type: "POST",
+			data: {
+				"keyword": keyword
+			},
+			datatype: "json",
+			success: function( data )
 			{
-				var item = $( "<option value='" + titleArray[ i ] + "'>" + titleArray[ i ] + "</option>" );
-				$( menu ).append( item );
+				console.log( "calling /titleArray" );
+				var titleArray = data.result;
+				titleArray = titleArray.sort();
+				var menu = document.createElement( "select" );
+				var menuHeader = $( "<option value='select'>Select Poem</option>" );
+				$( menu ).append( menuHeader );
+				for( var i = 0, ii = titleArray.length; i < ii; i++ )
+				{
+					var item = $( "<option value='" + titleArray[ i ] + "'>" + titleArray[ i ] + "</option>" );
+					$( menu ).append( item );
+				}
+				$( menu ).change( function()
+				{
+					midTerm.displayPoem( $( this ).val() );
+				} );
+				$( "p" ).before( menu );
+			},
+			error: function( jqxhr, status, errorThrown )
+			{
+				console.log( jqxhr.responseText );
+				console.log( status );
+				console.log( errorThrown );
 			}
-			$( menu ).change( function(){
-				//console.log( $( this ).val() );
-				midTerm.displayPoem( $( this ).val() );
-			} );
-			$( "p" ).before( menu );
 		} );
 	},
 	displayPoem: function( title )
@@ -33,7 +50,7 @@ var midTerm = {
 		console.log( title );
 		$.ajax( {
 			url: "/getPoem",
-			type: "GET",
+			type: "POST",
 			data: {
 				"title": title
 			},
@@ -47,7 +64,13 @@ var midTerm = {
 				console.log( errorThrown );
 			}
 		} );
-
+	},
+	search: function()
+	{
+		$( "select" ).remove();
+		var keyword = $( "#searchField" ).val().toLowerCase();
+		console.log( keyword );
+		midTerm.createMenu( keyword );
 	}
 };
 midTerm.init();
