@@ -1,12 +1,16 @@
 {
-	"name": "Midterm",
+	"name": "poemReader",
 	"version": "0.0.1",
     "private": true,
     "scripts": {
         "start": "nodejs server.js"
     },
-    "dependencies":{
+    "dependencies": {
         "express": "latest",
         "mongodb": "latest"
+    },
+    "devDependencies": {
+        "grunt": "latest",
+        "grunt-contrib-jshint": "latest"
     }
 }

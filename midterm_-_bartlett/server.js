@@ -11,6 +11,7 @@ var url02 = "mongodb://192.168.2.19:27017/test";
 
 app.post( "/insertData", function( request )
 {
+	"use strict";
 	MongoClient.connect( url01, function( err, db )
 	{
 		if( err ) throw err;
@@ -44,6 +45,7 @@ app.post( "/insertData", function( request )
 
 app.post( "/titleArray", function( request, response )
 {
+	"use strict";
 	MongoClient.connect( url01, function( err, db )
 	{
 		if( err ) throw err;
@@ -66,6 +68,7 @@ app.post( "/titleArray", function( request, response )
 
 app.post( "/getPoem", function( request, response )
 {
+	"use strict";
 	MongoClient.connect( url01, function( err, db )
 	{
 		if( err ) console.dir( err );
@@ -89,6 +92,7 @@ app.post( "/getPoem", function( request, response )
 
 app.post( "/deletePoem", function( request, response )
 {
+	"use strict";
 	MongoClient.connect( url01, function( err, db )
 	{
 		if( err ) console.dir( err );
@@ -103,7 +107,18 @@ app.post( "/deletePoem", function( request, response )
 	} );
 } );
 
-app.get( "/", function( request, result ){
+app.get( "/", function( request, result )
+{
+	"use strict";
+	MongoClient.connect( url01, function( err, db )
+	{
+		if( err ) console.dir( err );
+		var collection = db.collection( "test_insert" );
+		collection.remove( function()
+		{
+			console.dir( "DB cleared" );
+		} );
+	} );
 	var html = fs.readFileSync( __dirname + "/public/index.html" );
 	result.writeHeader( 200, { "Content-Type": "text/html" } );
 	result.write( html );

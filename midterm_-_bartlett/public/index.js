@@ -1,14 +1,16 @@
-var midTerm = {
+var poemReader = {
 	init: function()
 	{
-		$( "#insertFile" ).on( "click", midTerm.inputFile );
-		$( "#search" ).on( "click", midTerm.search );
-		$( "#addPoem" ).on( "click", midTerm.inputFile );
-		$( "#deleteButton" ).on( "click", midTerm.deletePoem );
-		midTerm.createMenu( "poem" );
+		"use strict";
+		$( "#insertFile" ).on( "click", poemReader.inputFile );
+		$( "#search" ).on( "click", poemReader.search );
+		$( "#addPoem" ).on( "click", poemReader.inputFile );
+		$( "#deleteButton" ).on( "click", poemReader.deletePoem );
+		poemReader.createMenu( "poem" );
 	},
 	inputFile: function()
 	{
+		"use strict";
 		var switcher = this.id;
 		console.log( switcher );
 		
@@ -30,10 +32,11 @@ var midTerm = {
 				console.log( errorThrown );
 			}
 		} );
-		midTerm.createMenu( "poem" );
+		poemReader.createMenu( "poem" );
 	},
 	createMenu: function( keyword )
 	{
+		"use strict";
 		// remove previous menu
 		$( "select" ).remove();
 		
@@ -59,7 +62,7 @@ var midTerm = {
 				}
 				$( menu ).change( function()
 				{
-					midTerm.displayPoem( $( this ).val() );
+					poemReader.displayPoem( $( this ).val() );
 				} );
 				$( "form" ).eq( 0 ).append( menu );
 			},
@@ -73,6 +76,7 @@ var midTerm = {
 	},
 	displayPoem: function( title )
 	{
+		"use strict";
 		console.log( title );
 		$.ajax( {
 			url: "/getPoem",
@@ -94,13 +98,15 @@ var midTerm = {
 		} );
 	},
 	search: function()
-	{ 
+	{
+		"use strict";
 		var keyword = $( "#searchField" ).val().toLowerCase();
 		console.log( keyword );
-		midTerm.createMenu( keyword );
+		poemReader.createMenu( keyword );
 	},
 	deletePoem: function()
 	{
+		"use strict";
 		var title = $( "#deleteBox" ).val();
 		$.ajax( {
 			url: "/deletePoem",
@@ -114,7 +120,7 @@ var midTerm = {
 				if( data.result )
 				{
 					console.log( "Poem '" + title + "' was deleted from the database." );
-					midTerm.createMenu( "poem" );
+					poemReader.createMenu( "poem" );
 				}
 			},
 			error: function( jqxhr, status, errorThrown )
@@ -126,4 +132,4 @@ var midTerm = {
 		} );
 	}
 };
-midTerm.init();
+poemReader.init();	
