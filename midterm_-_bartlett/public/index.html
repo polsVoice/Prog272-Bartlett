@@ -6,9 +6,16 @@
 		<title>Poetry</title>
 	</head>
 	<body>
-		<button type="button" id="inputFile">Input File</button>
-		<input type="search" id="searchField" placeholder="Enter a keyword" />
-		<button type="button" id="search">Search</button>
+		<form>
+			<button type="button" id="insertFile">Input File</button>
+			<input type="search" id="searchField" placeholder="Enter a keyword" />
+			<button type="button" id="search">Search</button>
+			<button type="button" id="addPoem">Add Poem</button>
+		</form>
+		<form>
+			<input type="text" id="deleteBox" placeholder="Enter name of poem" />
+			<button type="button" id="deleteButton">Delete Poem</button>
+		</form>
 		<p id="output">
 		</p>
 		<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>

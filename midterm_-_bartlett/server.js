@@ -9,7 +9,7 @@ var port = process.env.PORT || 30025;
 var url01 = "mongodb://127.0.0.1:27017/test";
 var url02 = "mongodb://192.168.2.19:27017/test";
 
-app.get( "/insertData", function()
+app.post( "/insertData", function( request )
 {
 	MongoClient.connect( url01, function( err, db )
 	{
@@ -17,9 +17,18 @@ app.get( "/insertData", function()
 		else
 		{
 			var collection = db.collection( "test_insert" );
-			console.log( "collection to database established" );
-			var inputFile = fs.readFileSync( "Shakespeare.json", "utf8" );
-			var jsonObject = JSON.parse( inputFile );
+			var switcher = request.body.switcher;
+			var file = "";
+			if( switcher === "insertFile" )
+			{
+				file = "Shakespeare.json";
+			}
+			else if( switcher === "addPoem" )
+			{
+				file = "another_poem.json";
+			}
+			var input = fs.readFileSync( file, "utf8" );
+			var jsonObject = JSON.parse( input );
 			
 			collection.insert( jsonObject, function( err, docs )
 			{
@@ -39,16 +48,8 @@ app.post( "/titleArray", function( request, response )
 	{
 		if( err ) throw err;
 		var collection = db.collection( "test_insert" );
-		var search = "";
 		console.dir( request.body.keyword );
 		var keyword = request.body.keyword;
-		if( keyword )
-		{
-			search = '{ "keywords": ' + keyword + " }";
-			console.log( search );
-		}
-		else
-			search = "";
 		collection.find(  { "keywords": keyword }, { "title": 1, "_id": 0 } ).toArray( function( err, results)
 		{
 			if( err ) console.dir( err );
@@ -58,7 +59,6 @@ app.post( "/titleArray", function( request, response )
 			{
 				titleArray[ i ] = results[ i ].title;
 			}
-			//console.dir( titleArray.length );
 			response.send( { "result": titleArray } );
 		} );
 	} );
@@ -84,6 +84,22 @@ app.post( "/getPoem", function( request, response )
 					response.send( { "result": result } );
 				} );
 		}
+	} );
+} );
+
+app.post( "/deletePoem", function( request, response )
+{
+	MongoClient.connect( url01, function( err, db )
+	{
+		if( err ) console.dir( err );
+		var collection = db.collection( "test_insert" );
+		var title = request.body.title;
+		var statusDone = true;
+		collection.remove( { "title": title }, function()
+		{
+			response.send( { "result": statusDone } );
+			console.dir( "Poem " + title + " was removed." ); 
+		} );
 	} );
 } );
 
