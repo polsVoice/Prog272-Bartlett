@@ -52,20 +52,23 @@ var poemReader = {
 			{
 				console.log( "calling /titleArray" );
 				var titleArray = data.result;
-				titleArray = titleArray.sort();
-				var menu = document.createElement( "select" );
-				var menuHeader = $( "<option value='select'>Select Poem</option>" );
-				$( menu ).append( menuHeader );
-				for( var i = 0, ii = titleArray.length; i < ii; i++ )
+				if( titleArray.length > 0 )
 				{
-					var item = $( "<option value='" + titleArray[ i ] + "'>" + titleArray[ i ] + "</option>" );
-					$( menu ).append( item );
+					titleArray = titleArray.sort();
+					var menu = document.createElement( "select" );
+					var menuHeader = $( "<option value='select'>Select Poem</option>" );
+					$( menu ).append( menuHeader );
+					for( var i = 0, ii = titleArray.length; i < ii; i++ )
+					{
+						var item = $( "<option value='" + titleArray[ i ] + "'>" + titleArray[ i ] + "</option>" );
+						$( menu ).append( item );
+					}
+					$( menu ).change( function()
+					{
+						poemReader.displayPoem( $( this ).val() );
+					} );
+					$( "form" ).eq( 0 ).append( menu );
 				}
-				$( menu ).change( function()
-				{
-					poemReader.displayPoem( $( this ).val() );
-				} );
-				$( "form" ).eq( 0 ).append( menu );
 			},
 			error: function( jqxhr, status, errorThrown )
 			{
