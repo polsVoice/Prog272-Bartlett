@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" content="Poetry" />
+		<link rel="stylesheet" href="styles.css" type="text/css" />
+		<link href="library/jasmine.css" type="text/css" rel="stylesheet">
+		<title>Poetry</title>
+	</head>
+	<body>
+		<form>
+			<p>Press "Input File" to populate database.
+			</p>
+			<button type="button" id="insertFile">Input File</button>
+			<input type="search" id="searchField" placeholder="Enter a keyword" />
+			<button type="button" id="search">Search</button>
+			<button type="button" id="addPoem">Add Poem</button>
+		</form>
+		<form>
+			<input type="text" id="deleteBox" placeholder="Enter name of poem" />
+			<button type="button" id="deleteButton">Delete Poem</button>
+		</form>
+		<p id="output">
+		</p>
+		<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+        <script src="Library/jasmine.js"></script>
+        <script src="Library/jasmine-html.js"></script>
+        <script src="Library/boot.js"></script>
+        <script src="Library/jquery-2.0.3.js"></script>
+        <script src="Library/jasmine-jquery.js"></script>
+		<script src="index.js" type="text/javascript"></script>
+		<script src="test.js" type="text/javascript"></script>
+	</body>
+</html>

@@ -18,16 +18,16 @@ module.exports = function( grunt )
 					strict : true,
 					newcap : false,
 					globals : {
-					describe : true,
-					afterEach : true,
-					beforeEach : true,
-					inject : true,
-					it : true,
-					jasmine : true,
-					expect : true,
-					angular : true,
-					module : true,
-					Crafty : true
+						describe : true,
+						afterEach : true,
+						beforeEach : true,
+						inject : true,
+						it : true,
+						jasmine : true,
+						expect : true,
+						angular : true,
+						module : true,
+						Crafty : true
 				}
 			}
 		}

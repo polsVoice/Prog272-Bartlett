@@ -38,7 +38,7 @@ var poemReader = {
 	{
 		"use strict";
 		// remove previous menu
-		$( "select" ).remove();
+		$( "#selectPoem" ).remove();
 		
 		$.ajax( {
 			url: "/titleArray",
@@ -53,6 +53,7 @@ var poemReader = {
 				var titleArray = data.result;
 				titleArray = titleArray.sort();
 				var menu = document.createElement( "select" );
+				$( menu ).attr( "id", "selectPoem" );
 				var menuHeader = $( "<option value='select'>Select Poem</option>" );
 				$( menu ).append( menuHeader );
 				for( var i = 0, ii = titleArray.length; i < ii; i++ )
@@ -132,4 +133,4 @@ var poemReader = {
 		} );
 	}
 };
-poemReader.init();	
+poemReader.init();
