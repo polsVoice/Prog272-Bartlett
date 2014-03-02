@@ -1,5 +1,5 @@
 var poemReader = {
-	ip: "http://10.10.125.99:30025",
+	ip: "http://192.168.1.108:30025",
 	init: function()
 	{
 		"use strict";

@@ -3,11 +3,13 @@ var request = require( "request" );
 describe( "Test routes", function()
 {
 	"use strict";
-	it( "should fetch a poem", function( done )
+	it( "should insert poetry file", function( done )
 	{
-		request( "http://localhost:30025/getPoem", function( err, response, body )
+		var switcher = "insertFile";
+		request.post( { switcher: switcher }, "http://localhost:30025/insertData", function( err, response, body )
 		{
-			expect( body ).not.toEqual( "" )
+			expect( body ).toContain( "Sonnet" );
+			done();
 		} );
 	} );
 } );
