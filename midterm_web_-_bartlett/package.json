@@ -12,6 +12,7 @@
     "devDependencies": {
         "grunt": "latest",
         "grunt-contrib-jshint": "latest",
-        "request": "latest"
+        "request": "latest",
+        "connect": "~2.13.1"
     }
 }

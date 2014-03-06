@@ -3,7 +3,11 @@ var app = express();
 var MongoClient = require( "mongodb" ).MongoClient;
 var fs = require( "fs" );
 
-app.use( express.bodyParser() );
+//app.use( express.bodyParser() );
+var connect = require( "connect" );
+app.use( connect.urlencoded() );
+app.use( connect.json() );
+
 var port = process.env.PORT || 30025;
 
 var url01 = "mongodb://127.0.0.1:27017/test";
