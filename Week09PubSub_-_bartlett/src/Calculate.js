@@ -1,6 +1,8 @@
 
 define( [ "jQuery", "pubsub" ], function()
 {
+    "use strict";
+    
     function subscriber()
     {
         console.log( "Subscriber constructor called." );
@@ -32,5 +34,5 @@ define( [ "jQuery", "pubsub" ], function()
     
     return{
         subscriber: subscriber
-    }
+    };
 } );

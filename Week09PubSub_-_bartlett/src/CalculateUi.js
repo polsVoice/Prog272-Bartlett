@@ -1,6 +1,8 @@
 
 define( [ "jQuery", "pubsub" ], function()
 {
+    "use strict";
+    
     function publisher()
     {
         $( "#num1" ).val( 3 );
@@ -46,7 +48,6 @@ define( [ "jQuery", "pubsub" ], function()
                                 } );
     };
 
-    
     return{
         publisher: publisher
     };
