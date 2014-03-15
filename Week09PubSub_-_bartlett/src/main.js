@@ -9,7 +9,9 @@ require( [ "CalculateUi", "Calculate", ], function( calcUi, calc )
 {
     "use strict";
     
-    console.log( "Main called." );
-    calcUi.publisher();
-    calc.subscriber();
+    $( document ).ready( function()
+                        {
+                            calcUi.publisher();
+                            calc.subscriber();
+                        } );
 } );
