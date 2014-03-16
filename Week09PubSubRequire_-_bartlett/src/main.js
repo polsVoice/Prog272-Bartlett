@@ -8,10 +8,7 @@ require.config( {
 require( [ "CalculateUi", "Calculate", ], function( calcUi, calc )
 {
     "use strict";
-    
-    $( document ).ready( function()
-                        {
-                            calcUi.publisher();
-                            calc.subscriber();
-                        } );
+
+    calcUi.publisher();
+    calc.subscriber();
 } );
