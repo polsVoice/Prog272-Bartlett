@@ -7,45 +7,43 @@ define( [ "jQuery", "pubsub" ], function()
     {
         $( "#num1" ).val( 3 );
         $( "#num2" ).val( 2 );
-        $( "#addButton" ).on( "click", addition );
-        $( "#multiplyButton" ).on( "click", multiply );
-        $( "#subtractButton" ).on( "click", subtract );
+        $( "#addButton" ).on( "click", publishNums );
+        $( "#multiplyButton" ).on( "click", publishNums );
+        $( "#subtractButton" ).on( "click", publishNums );
     }
     
-    var addition = function()
+    var nums = function()
     {
         var num1 = $( "#num1" ).val();
         var num2 = $( "#num2" ).val();
-        $.publish( "addition", { num1: num1, num2: num2, 
-                                    callback: function( result )
-                                    { 
-                                        $( "#result" ).html( result ); 
-                                    } 
-                                } );
-    };
+        return{
+            num1: num1,
+            num2: num2,
+            answer: function( result )
+            {
+                $( "#result" ).html( result );
+            }
+        };
+    }
     
-    var multiply = function()
+    var publishNums = function()
     {
-        var num1 = $( "#num1" ).val();
-        var num2 = $( "#num2" ).val();
-        $.publish( "multiplication", { num1: num1, num2: num2, 
-                                    callback: function( result )
-                                    { 
-                                        $( "#result" ).html( result ); 
-                                    } 
-                                } );
-    };
-    
-    var subtract = function()
-    {
-        var num1 = $( "#num1" ).val();
-        var num2 = $( "#num2" ).val();
-        $.publish( "subtraction", { num1: num1, num2: num2, 
-                                    callback: function( result )
-                                    { 
-                                        $( "#result" ).html( result ); 
-                                    } 
-                                } );
+        var buttonId = this.id;
+        var pubName = "";
+        
+        switch( buttonId )
+        {
+            case "addButton":
+                pubName = "addition";
+                break;
+            case "multiplyButton":
+                pubName = "multiplication";
+                break;
+            case "subtractButton":
+                pubName = "subtraction";
+                break;
+        }
+        $.publish( pubName, nums() );
     };
 
     return{

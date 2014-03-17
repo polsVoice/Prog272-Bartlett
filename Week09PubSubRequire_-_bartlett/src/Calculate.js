@@ -13,23 +13,17 @@ define( [ "jQuery", "pubsub" ], function()
     
     function add( event, numbers )
     {
-        console.log( "Add function called." );
-        console.log( event );
-        numbers.callback( parseInt( numbers.num1 ) + parseInt( numbers.num2 ) );
+        numbers.answer( parseInt( numbers.num1 ) + parseInt( numbers.num2 ) );
     }
     
     function multiply( event, numbers )
     {
-        console.log( "Multiply function called." );
-        console.log( event );
-        numbers.callback( numbers.num1 * numbers.num2 );
+        numbers.answer( numbers.num1 * numbers.num2 );
     }
     
     function subtract( event, numbers )
     {
-        console.log( "Subtract function called." );
-        console.log( event );
-        numbers.callback( numbers.num1 - numbers.num2 );
+        numbers.answer( numbers.num1 - numbers.num2 );
     }
     
     return{
