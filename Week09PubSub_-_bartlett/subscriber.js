@@ -20,17 +20,17 @@ pubSub.subscriber = ( function()
     
     function add( numbers )
     {
-        numbers.callback( parseInt( numbers.num1 ) + parseInt( numbers.num2 ) );
+        numbers.answer( parseInt( numbers.num1 ) + parseInt( numbers.num2 ) );
     }
     
     function multiply( numbers )
     {
-        numbers.callback( numbers.num1 * numbers.num2 );
+        numbers.answer( numbers.num1 * numbers.num2 );
     }
     
     function subtract( numbers )
     {
-        numbers.callback( numbers.num1 - numbers.num2 );
+        numbers.answer( numbers.num1 - numbers.num2 );
     }
     
     return subscriber;
