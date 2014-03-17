@@ -1,9 +1,12 @@
 {
-	"name": "NodeRoutes-Bartlett",
-	"description": "Simple routes script",
-	"version": "0.0.1",
-	"private": true,
-	"dependencies": {
-		"express": "3.4.8"
-	}
+  "name": "NodeRoutes-Bartlett",
+  "description": "Simple routes script",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "latest"
+  },
+  "devDependencies": {
+    "connect": "^2.14.2"
+  }
 }

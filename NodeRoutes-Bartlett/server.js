@@ -4,7 +4,10 @@ var fs = require( "fs" );
 var ftInMilesMod = require( "./library/feet_in_mile.js" );
 var circumCircle = require( "./library/circle_circumference.js" );
 
-app.use( express.bodyParser() );
+var connect = require( "connect" );
+app.use( connect.urlencoded() );
+app.use( connect.json() );
+
 var port = process.env.PORT || 30025;
 
 app.get( "/printFtInMiles", function( request, response ){
