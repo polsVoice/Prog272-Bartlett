@@ -1,0 +1,14 @@
+{
+    "pathToConfig": "./config.json",
+    "reallyWrite": true,
+    "bucketName": "tekcub01",
+    "folderToWalk": "/var/www/bc",
+    "s3RootFolder": "prog272",
+    "createFolderToWalkOnS3": true,
+    "createIndex": false,
+    "filesToIgnore": [
+        "Thumbs.db",
+        ".gitignore",
+        "MyFile.html"
+    ]
+}

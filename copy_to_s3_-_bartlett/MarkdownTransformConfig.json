@@ -1,0 +1,23 @@
+[
+	{
+		"pathToPython": "C:\\Python\\Python33\\Python.exe",
+		"copyFrom": "C:\\Users\\Charlie\\DropBox\\StackEdit",
+		"copyTo": "C:\\Users\\Public\\Documents\\TestSite\\Site",
+		"filesToCopy": ["DropBox", "MongoMark", "Test", "index"]
+	}, {
+		"pathToPython": "/usr/bin/python3.3",
+		"copyFrom": "/home/deuce/googledrive/prog272-Bartlett",
+		"copyTo": "/var/www/bc",
+		"filesToCopy": ["test"]
+	}, {
+		"pathToPython": "C:\\Python\\Python33\\Python.exe",
+		"copyFrom": "C:\\Src\\GoogleDrive\\Elvenware\\CloudNotes\\Assignments",
+		"copyTo": "C:\\Users\\Public\\Documents\\TestSite\\Site",
+		"filesToCopy": ["CopyToS3Part01", "CopyToS3Part02"]
+	}, {
+		"pathToPython": "C:\\Python\\Python33\\Python.exe",
+		"copyFrom": "C:\\Users\\Charlie\\DropBox\\StackEdit",
+		"copyTo": "C:\\Temp\\Site",
+		"filesToCopy": ["DropBox", "MongoMark", "Test", "index"]
+	}
+]
