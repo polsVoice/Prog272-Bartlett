@@ -7,8 +7,8 @@ a {
   color: #00B7FF;
 }
 
-.displayKing label 
-{
+.displayKing label {	
+	display: inline-block;
 	padding: 2px;	
 	width: 30%;
 	text-align: right;
@@ -29,9 +29,4 @@ a {
 	border: solid black 1px;
 	background-color: #00BBFF;
 	margin: 1%;
-}
-
-.displayKing input
-{
-    display: block;
 }

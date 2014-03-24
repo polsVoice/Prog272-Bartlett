@@ -11,12 +11,11 @@ var walkDirs = require("./Source/WalkDirs").walkDirs;
 var s3Code = require("./Source/S3Code");
 var fs = require("fs");
 var exec = require('child_process').exec;
-//var queryMongo = require( "./Source/QueryMongo" ).QueryMongo;
 var MongoClient = require( "mongodb" ).MongoClient;
 
 var app = express();
 
-var url = "mongodb://elcid:sunseednobodyexpects@ds033499.mongolab.com:33499/testmess";
+var url = 
 
 // all environments
 app.set('port', process.env.PORT || 30025);
@@ -119,40 +118,6 @@ app.get('/getBuildConfig', function(request, response) { 'use strict';
 	options = JSON.parse(options);
 	response.send(options);
 });
-
-app.get('/insertConfig', function(request, response) {
-	'use strict';
-	//readAndInsertConfig(response);
-	mongoClient.connect( url, function( err, db )
-	{
-        if( err ) throw err;
-        else
-        {
-            console.log( "Success!" );
-        }
-    } );
-});
-/*
-function readAndInsertConfig(response)
-{
-	'use strict';
-	fs.readFile('Options.json', 'utf8', function(err, fileContent) {
-		if (err) {
-			console.log(err);
-			response.send({
-				"Error" : err
-			});
-		} else {
-			console.log(fileContent);
-            /*
-			fileContent = JSON.parse(fileContent);
-			queryMongo.insertIntoCollection(response, collectionName,
-					fileContent);
-			// response.send({ "result" : fileContent });
-		}
-	});
-}
-*/
 
 http.createServer(app).listen(app.get('port'), function() {'use strict';
 	console.log('Express server listening on port ' + app.get('port'));

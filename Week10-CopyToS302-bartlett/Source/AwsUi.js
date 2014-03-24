@@ -7,7 +7,6 @@ define(['jquery'], function() {'use strict';
     var dataIndexTransform = 0;
 
     function AwsUi() {
-        $( "#updateConfig" ).click( updateConfig );
         $("#listBuckets").click(listBuckets);
         $("#copyToS3").click(copyToS3);
         $("#getOptions").click(getOptions);
@@ -20,13 +19,6 @@ define(['jquery'], function() {'use strict';
         getBuildConfig();
         getOptions();
     }
-    
-    var updateConfig = function()
-    {
-        $.getJSON( "/insertConfig", function()
-        {
-        } );
-    };
 
     var buildAll = function() {
         $.getJSON("/buildAll", {
@@ -52,10 +44,10 @@ define(['jquery'], function() {'use strict';
     };
 
     var displayTransformConfig = function(options) {
-        $("#pathToPython").val(options.pathToPython);
-        $("#copyFrom").val(options.copyFrom);
-        $("#copyTo").val(options.copyTo);
-        $("#filesToCopy").val(options.filesToCopy);
+        $("#pathToPython").html(options.pathToPython);
+        $("#copyFrom").html(options.copyFrom);
+        $("#copyTo").html(options.copyTo);
+        $("#filesToCopy").html(options.filesToCopy);
     };
 
     var displayOptions = function(options) {
