@@ -11,11 +11,10 @@ var walkDirs = require("./Source/WalkDirs").walkDirs;
 var s3Code = require("./Source/S3Code");
 var fs = require("fs");
 var exec = require('child_process').exec;
-var MongoClient = require( "mongodb" ).MongoClient;
+var qm = require( "./Source/QueryMongo" );
+var queryMongo = qm.QueryMongo;
 
 var app = express();
-
-var url = 
 
 // all environments
 app.set('port', process.env.PORT || 30025);
@@ -118,6 +117,27 @@ app.get('/getBuildConfig', function(request, response) { 'use strict';
 	options = JSON.parse(options);
 	response.send(options);
 });
+
+app.get( "/insertData", function( request, response )
+{
+    "use strict";
+    console.log( "Request received" );
+    var fileContent = fs.readFileSync( "MarkdownTransformConfig.json", "utf8" );
+    if( fileContent )
+        console.log( "file found!" );
+    var jsonObject = JSON.parse( fileContent );
+    queryMongo.insertIntoCollection( response, jsonObject );
+    /*
+    MongoClient.connect( url, function( err, db )
+    {
+        if( err ) throw err;
+        else
+        {
+            console.log( "database contacted" );
+        }
+    } );
+    */
+} );
 
 http.createServer(app).listen(app.get('port'), function() {'use strict';
 	console.log('Express server listening on port ' + app.get('port'));

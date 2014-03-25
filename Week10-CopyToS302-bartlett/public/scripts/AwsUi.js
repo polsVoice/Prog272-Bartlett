@@ -7,6 +7,7 @@ define(['jquery'], function() {'use strict';
     var dataIndexTransform = 0;
 
     function AwsUi() {
+        $( "#insertData" ).click( insertData );
         $("#listBuckets").click(listBuckets);
         $("#copyToS3").click(copyToS3);
         $("#getOptions").click(getOptions);
@@ -19,6 +20,28 @@ define(['jquery'], function() {'use strict';
         getBuildConfig();
         getOptions();
     }
+    
+    var displayDocument = function( document )
+    {
+        if( typeof document !== "undefined" )
+        {
+            $( "#pathToPython" ).val( document.pathToPython );
+            $( "#copyFrom" ).val( document.copyFrom );
+            $( "#copyTo" ).val( document.copyTo );
+            $( "#filesToCopy" ).val( document.filesToCopy );
+            
+        }
+    };
+    
+    var insertData = function()
+    {
+        console.log( "insertData called" );
+        $.publish( "insertData", function( data )
+        {
+            console.log( "insertData published" );
+            displayDocument( data[ 0 ] );
+        } );
+    };
 
     var buildAll = function() {
         $.getJSON("/buildAll", {
