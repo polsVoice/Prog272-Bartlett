@@ -122,10 +122,15 @@ app.get( "/insertData", function( request, response )
 {
     "use strict";
     console.log( "Request received" );
-    var fileContent = fs.readFileSync( "MarkdownTransformConfig.json", "utf8" );
-    if( fileContent )
-        console.log( "file found!" );
-    var jsonObject = JSON.parse( fileContent );
+    var mtConfig = fs.readFileSync( "MarkdownTransformConfig.json", "utf8" );
+    if( mtConfig )
+        console.log( "MarkdownTransformConfig.json found!" );
+   var options = fs.readFileSync( "Options.json", "utf8" );
+    if( options )
+        console.log( "Options.json found!" );
+    var mtConfigJson = JSON.parse( mtConfig );
+    var optionsJson = JSON.parse( options );
+    var jsonObject = mtConfigJson.concat( optionsJson );
     queryMongo.insertIntoCollection( response, jsonObject );
     /*
     MongoClient.connect( url, function( err, db )

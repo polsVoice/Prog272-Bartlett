@@ -29,7 +29,14 @@ define(['jquery'], function() {'use strict';
             $( "#copyFrom" ).val( document.copyFrom );
             $( "#copyTo" ).val( document.copyTo );
             $( "#filesToCopy" ).val( document.filesToCopy );
-            
+            $( "#pathToConfig" ).val( document.pathToConfig );
+            $( "#reallyWrite" ).val( document.reallyWrite );
+            $( "#bucketName" ).val( document.bucketName );
+            $( "#folderToWalk" ).val( document.folderToWalk );
+            $( "#s3RootFolder" ).val( document.s3RootFolder );
+            $( "#createFolderToWalkOnS3" ).val( document.createFolderToWalkOnS3 );
+            $( "#createIndex" ).val( document.createIndex );
+            $( "#filesToIgnore" ).val( document.filesToIgnore );
         }
     };
     
@@ -39,7 +46,8 @@ define(['jquery'], function() {'use strict';
         $.publish( "insertData", function( data )
         {
             console.log( "insertData published" );
-            displayDocument( data[ 0 ] );
+            var configData = $.extend( {}, data[ 0 ], data[ 3 ] );
+            displayDocument( configData );
         } );
     };
 
