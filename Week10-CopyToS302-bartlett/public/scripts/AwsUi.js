@@ -5,7 +5,9 @@ define(['jquery'], function() {'use strict';
     var transformOptions = null;
     var dataIndex = 0;
     var dataIndexTransform = 0;
-
+    
+    var collections = [ "MarkdownTransformConfig", "Options" ];
+    
     function AwsUi() {
         $( "#insertData" ).click( insertData );
         $("#listBuckets").click(listBuckets);
@@ -42,14 +44,41 @@ define(['jquery'], function() {'use strict';
     
     var insertData = function()
     {
+        console.log( "Insert Data button!" );
+        for( var i = 0, ii = collections.length; i < ii; i++ )
+        {
+            doInsert( "/insertData", i );
+        }
+    };
+    
+	var doInsert = function(route, index) {
+		$.getJSON(route, {
+			collectionName : collections[index]
+		}, function(data) {
+			console.log(data);
+            /*
+			for ( var i = 0; i < data.length; i++) {
+				$("#mongoData").append(
+						'<li>' + JSON.stringify(data[i]) + '</li>');
+			}
+            */
+		});
+	};
+        
+    /*
+    var insertData = function()
+    {
         console.log( "insertData called" );
         $.publish( "insertData", function( data )
         {
             console.log( "insertData published" );
+            
+            // combine JSON objects
             var configData = $.extend( {}, data[ 0 ], data[ 3 ] );
             displayDocument( configData );
         } );
     };
+    */
 
     var buildAll = function() {
         $.getJSON("/buildAll", {

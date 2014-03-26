@@ -118,6 +118,17 @@ app.get('/getBuildConfig', function(request, response) { 'use strict';
 	response.send(options);
 });
 
+app.get('/insertData', function(request, response) { 'use strict';
+    var collectionName = request.query.collectionName;
+    console.log('Write called: ' + collectionName);    
+    var fileName = collectionName + '.json';
+    console.log( "File name is " + fileName );
+    var fileContent = fs.readFileSync(fileName, 'utf8');
+    console.log( "File content is " + fileContent );
+    queryMongo.insertIntoCollection(response, collectionName, JSON.parse(fileContent));  
+});
+
+/*
 app.get( "/insertData", function( request, response )
 {
     "use strict";
@@ -141,8 +152,8 @@ app.get( "/insertData", function( request, response )
             console.log( "database contacted" );
         }
     } );
-    */
 } );
+*/
 
 http.createServer(app).listen(app.get('port'), function() {'use strict';
 	console.log('Express server listening on port ' + app.get('port'));
