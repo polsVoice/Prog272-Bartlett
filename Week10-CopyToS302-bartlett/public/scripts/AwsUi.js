@@ -172,7 +172,7 @@ define(['jquery'], function() {'use strict';
                 { options: JSON.stringify( jsonOptions() ) },
                 function( data )
                 {
-                    $( "#copyResult" ).html( "Result: " + data.result );
+                    $( "#copyResultA" ).html( "Result: " + data.result );
                 } );
     };
 
