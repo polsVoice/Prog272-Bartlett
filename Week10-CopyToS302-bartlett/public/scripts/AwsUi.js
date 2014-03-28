@@ -10,6 +10,7 @@ define(['jquery'], function() {'use strict';
     
     function AwsUi() {
         $( "#insertData" ).click( insertData );
+        $( "#readData" ).click( readData );
         $("#listBuckets").click(listBuckets);
         $("#copyToS3").click(copyToS3);
         $("#getOptions").click(getOptions);
@@ -19,8 +20,9 @@ define(['jquery'], function() {'use strict';
         $("#backButton").click(backward);
 
         $("#buildAll").click(buildAll);
-        getBuildConfig();
-        getOptions();
+        readData();
+        //getBuildConfig();
+        //getOptions();
     }
     
     var displayDocument = function( document )
@@ -38,7 +40,7 @@ define(['jquery'], function() {'use strict';
             $( "#s3RootFolder" ).val( document.s3RootFolder );
             $( "#createFolderToWalkOnS3" ).val( document.createFolderToWalkOnS3 );
             $( "#createIndex" ).val( document.createIndex );
-            $( "#filesToIgnore" ).val( document.filesToIgnore );
+            $( "#filesToIgnore" ).val( document.filesToIgnore );            
         }
     };
     
@@ -56,14 +58,50 @@ define(['jquery'], function() {'use strict';
 			collectionName : collections[index]
 		}, function(data) {
 			console.log(data);
-            /*
-			for ( var i = 0; i < data.length; i++) {
-				$("#mongoData").append(
-						'<li>' + JSON.stringify(data[i]) + '</li>');
-			}
-            */
 		});
 	};
+    
+    var readData = function()
+    {
+        readTransformConfig();
+        readOptions();
+    };
+    
+    var readTransformConfig = function()
+    {
+        $.getJSON( "/read", 
+        { collectionName: collections[ 0 ] },
+        function( data )
+        {
+            if( dataIndexTransform >= data.length )
+            {
+                dataIndexTransform = 0;
+            }
+            else if( dataIndexTransform < 0 )
+            {
+                dataIndexTransform = data.length-1;
+            }
+            displayTransformConfig( data[ dataIndexTransform ] );
+        } );
+    };
+    
+    var readOptions = function()
+    {
+        $.getJSON( "/read", 
+        { collectionName: collections[ 1 ] },
+        function( data )
+        {
+            if( dataIndex >= data.length )
+            {
+                dataIndex = 0;
+            }
+            else if( dataIndex < 0 )
+            {
+                dataIndex = data.length-1;
+            }
+            displayOptions( data[ dataIndex ] );
+        } );
+    };
         
     /*
     var insertData = function()
@@ -104,22 +142,22 @@ define(['jquery'], function() {'use strict';
     };
 
     var displayTransformConfig = function(options) {
-        $("#pathToPython").html(options.pathToPython);
-        $("#copyFrom").html(options.copyFrom);
-        $("#copyTo").html(options.copyTo);
-        $("#filesToCopy").html(options.filesToCopy);
+        $("#pathToPython").val(options.pathToPython);
+        $("#copyFrom").val(options.copyFrom);
+        $("#copyTo").val(options.copyTo);
+        $("#filesToCopy").val(options.filesToCopy);
     };
 
     var displayOptions = function(options) {
         $("#currentDocument").html(dataIndex + 1);
-        $("#pathToConfig").html(options.pathToConfig);
-        $("#reallyWrite").html(options.reallyWrite ? "true" : "false");
-        $("#bucketName").html(options.bucketName);
-        $("#folderToWalk").html(options.folderToWalk);
-        $("#s3RootFolder").html(options.s3RootFolder);
-        $("#createFolderToWalkOnS3").html(options.createFolderToWalkOnS3 ? "true" : "false");
-        $("#createIndex").html(options.createIndex ? "true" : "false");
-        $("#filesToIgnore").html(options.filesToIgnore);
+        $("#pathToConfig").val(options.pathToConfig);
+        $("#reallyWrite").val(options.reallyWrite ? "true" : "false");
+        $("#bucketName").val(options.bucketName);
+        $("#folderToWalk").val(options.folderToWalk);
+        $("#s3RootFolder").val(options.s3RootFolder);
+        $("#createFolderToWalkOnS3").val(options.createFolderToWalkOnS3 ? "true" : "false");
+        $("#createIndex").val(options.createIndex ? "true" : "false");
+        $("#filesToIgnore").val(options.filesToIgnore);
     };
 
     var getBuildConfig = function() {
@@ -139,14 +177,21 @@ define(['jquery'], function() {'use strict';
             alert(JSON.stringify(a));
         });
     };
-
+/*
     var forwardTransform = function() {
         if (dataIndexTransform < transformOptions.length - 1) {
             dataIndexTransform++;
             displayTransformConfig(transformOptions[dataIndexTransform]);
         }
     };
-
+    */
+    
+    var forwardTransform = function()
+    {
+        dataIndexTransform++;
+        readTransformConfig();
+    };
+/*
     var backwardTransform = function() {
         if (dataIndexTransform > 0) {
             dataIndexTransform--;
@@ -155,14 +200,29 @@ define(['jquery'], function() {'use strict';
         }
         return dataIndexTransform;
     };
-
+    */
+    
+    var backwardTransform = function()
+    {
+        dataIndexTransform--;
+        readTransformConfig();
+    }
+/*
     var forward = function() {
         if (dataIndex < options.length - 1) {
             dataIndex++;
             displayOptions(options[dataIndex]);
         }
     };
+    */
+    
+    var forward = function()
+    {
+        dataIndex++;
+        readOptions();
+    };
 
+/*
     var backward = function() {
         if (dataIndex > 0) {
             dataIndex--;
@@ -170,6 +230,13 @@ define(['jquery'], function() {'use strict';
             return true;
         }
         return false;
+    };
+    */
+    
+    var backward = function()
+    {
+        dataIndex--;
+        readOptions();
     };
 
     var listBuckets = function() {

@@ -112,10 +112,11 @@ app.get('/buildAll', function(request, response) { 'use strict';
 });
 
 app.get('/getBuildConfig', function(request, response) { 'use strict';
-	console.log('getBuildConfig called');
+    console.log('getBuildConfig called');
 	var options = fs.readFileSync("MarkdownTransformConfig.json", 'utf8');
 	options = JSON.parse(options);
 	response.send(options);
+    
 });
 
 app.get('/insertData', function(request, response) { 'use strict';
@@ -128,32 +129,12 @@ app.get('/insertData', function(request, response) { 'use strict';
     queryMongo.insertIntoCollection(response, collectionName, JSON.parse(fileContent));  
 });
 
-/*
-app.get( "/insertData", function( request, response )
-{
-    "use strict";
-    console.log( "Request received" );
-    var mtConfig = fs.readFileSync( "MarkdownTransformConfig.json", "utf8" );
-    if( mtConfig )
-        console.log( "MarkdownTransformConfig.json found!" );
-   var options = fs.readFileSync( "Options.json", "utf8" );
-    if( options )
-        console.log( "Options.json found!" );
-    var mtConfigJson = JSON.parse( mtConfig );
-    var optionsJson = JSON.parse( options );
-    var jsonObject = mtConfigJson.concat( optionsJson );
-    queryMongo.insertIntoCollection( response, jsonObject );
-    /*
-    MongoClient.connect( url, function( err, db )
-    {
-        if( err ) throw err;
-        else
-        {
-            console.log( "database contacted" );
-        }
-    } );
-} );
-*/
+app.get('/read', function(request, response) { 'use strict';
+	console.log('read route called');
+	var collectionName = request.query.collectionName;
+	console.log('request.query.collectionName: ', collectionName);
+	queryMongo.getCollectionData(response, collectionName);	
+});
 
 http.createServer(app).listen(app.get('port'), function() {'use strict';
 	console.log('Express server listening on port ' + app.get('port'));
