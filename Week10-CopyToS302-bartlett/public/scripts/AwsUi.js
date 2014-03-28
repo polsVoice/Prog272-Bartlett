@@ -7,6 +7,7 @@ define(['jquery'], function() {'use strict';
     var dataIndexTransform = 0;
     
     var collections = [ "MarkdownTransformConfig", "Options" ];
+    var configArray = [];
     
     function AwsUi() {
         $( "#insertData" ).click( insertData );
@@ -24,7 +25,7 @@ define(['jquery'], function() {'use strict';
         //getBuildConfig();
         //getOptions();
     }
-    
+    /*
     var displayDocument = function( document )
     {
         if( typeof document !== "undefined" )
@@ -43,7 +44,7 @@ define(['jquery'], function() {'use strict';
             $( "#filesToIgnore" ).val( document.filesToIgnore );            
         }
     };
-    
+    */
     var insertData = function()
     {
         console.log( "Insert Data button!" );
@@ -102,22 +103,7 @@ define(['jquery'], function() {'use strict';
             displayOptions( data[ dataIndex ] );
         } );
     };
-        
-    /*
-    var insertData = function()
-    {
-        console.log( "insertData called" );
-        $.publish( "insertData", function( data )
-        {
-            console.log( "insertData published" );
-            
-            // combine JSON objects
-            var configData = $.extend( {}, data[ 0 ], data[ 3 ] );
-            displayDocument( configData );
-        } );
-    };
-    */
-
+/*
     var buildAll = function() {
         $.getJSON("/buildAll", {
             options : JSON.stringify(transformOptions),
@@ -132,13 +118,62 @@ define(['jquery'], function() {'use strict';
             }
         });
     };
-
+    */
+    
+    var buildAll = function()
+    {
+        var pathToPython = $( "#pathToPython" ).val();
+        $.getJSON( "/buildAll", 
+                { 
+                    pathToPython: pathToPython,
+                    index: dataIndexTransform
+                },
+                function( result )
+                {
+                    $( "#buildData" ).empty();
+                    var fileArray = result.data.split( "\n" );
+                    for( var i = 0, ii = fileArray.length; i < ii; i++ )
+                    {
+                        if( fileArray[ i ].length > 0 )
+                        {
+                            $( "#buildData" ).append( "<li>" + fileArray[ i ] + "</li>" );
+                        }
+                    }
+                } );
+    };
+    
+    var jsonOptions = function()
+    {
+        var jsonObject = {
+        "pathToConfig": $( "#pathToConfig" ).val(),
+        "reallyWrite": $( "#reallyWrite" ).val(),
+        "bucketName": $( "#bucketName" ).val(),
+        "folderToWalk": $( "#folderToWalk" ).val(),
+        "s3RootFolder": $( "#s3RootFolder" ).val(),
+        "createFolderToWalkOnS3": $( "#createFolderToWalkOnS3" ).val(),
+        "createIndex": $("#createIndex").val(),
+        "filesToIgnore": $( "#filesToIgnore" ).val()
+        };
+        return jsonObject;
+    };
+/*
     var copyToS3 = function() {
         $.getJSON("/copyToS3", {
             options : JSON.stringify(options[dataIndex])
         }, function(data) {
             $("#copyResult").html("Result: " + data.result);
         });
+    };
+    */
+    
+    var copyToS3 = function()
+    {
+        $.getJSON( "/copyToS3",
+                { options: JSON.stringify( jsonOptions() ) },
+                function( data )
+                {
+                    $( "#copyResult" ).html( "Result: " + data.result );
+                } );
     };
 
     var displayTransformConfig = function(options) {
@@ -168,6 +203,8 @@ define(['jquery'], function() {'use strict';
             alert(JSON.stringify(a));
         });
     };
+    
+    /*
     var getOptions = function() {
         $.getJSON("/getOptions", function(optionsInit) {
             options = optionsInit;
@@ -177,13 +214,6 @@ define(['jquery'], function() {'use strict';
             alert(JSON.stringify(a));
         });
     };
-/*
-    var forwardTransform = function() {
-        if (dataIndexTransform < transformOptions.length - 1) {
-            dataIndexTransform++;
-            displayTransformConfig(transformOptions[dataIndexTransform]);
-        }
-    };
     */
     
     var forwardTransform = function()
@@ -191,47 +221,18 @@ define(['jquery'], function() {'use strict';
         dataIndexTransform++;
         readTransformConfig();
     };
-/*
-    var backwardTransform = function() {
-        if (dataIndexTransform > 0) {
-            dataIndexTransform--;
-            displayTransformConfig(transformOptions[dataIndexTransform]);
-            return dataIndexTransform;
-        }
-        return dataIndexTransform;
-    };
-    */
     
     var backwardTransform = function()
     {
         dataIndexTransform--;
         readTransformConfig();
     }
-/*
-    var forward = function() {
-        if (dataIndex < options.length - 1) {
-            dataIndex++;
-            displayOptions(options[dataIndex]);
-        }
-    };
-    */
     
     var forward = function()
     {
         dataIndex++;
         readOptions();
     };
-
-/*
-    var backward = function() {
-        if (dataIndex > 0) {
-            dataIndex--;
-            displayOptions(options[dataIndex]);
-            return true;
-        }
-        return false;
-    };
-    */
     
     var backward = function()
     {

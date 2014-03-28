@@ -94,10 +94,35 @@ app.get( "/listBuckets", function( request, response )
 app.get('/copyToS3', function(request, response) {'use strict';
 	console.log(typeof request.query.options);	
 	var options = JSON.parse(request.query.options);
-	console.log(options);
+	//var options = request.query.options;
+    console.log(options);
 	walkDirs(options, response);
 });
 
+var buildAll = function( response, path, index )
+{
+    "use strict";
+    console.log( "buildAll was called" );
+    var command = path + " MarkdownTransform.py -i " + index;
+    try
+    {
+        exec( command, function callback( error, stdout, stderr )
+        {
+            console.log( "convertToHtml was called er: ", error );
+            console.log( "convertToHtml was called so: ", stdout );
+            console.log( "convertToHtml was called se: ", stderr );
+            response.send( { "result": "Success", "data": stdout } );
+        } );
+    }
+    catch( e )
+    {
+        console.log( e.message );
+        response.send( { "result": "error", "data": e } );
+    }
+};
+
+
+/*
 var buildAll = function(response, config, index) { 'use strict';
 	console.log("BuildAll was called");
 	// var config = fs.readFileSync("MarkdownTransformConfig.json", 'utf8');	
@@ -116,13 +141,22 @@ var buildAll = function(response, config, index) { 'use strict';
 		response.send( { "result" : "error", "data": e });
 	}
 };
-
+/*
 app.get('/buildAll', function(request, response) { 'use strict';
 	console.log("buildAll called");	
 	var options = JSON.parse(request.query.options);
 	buildAll(response, options, request.query.index);
 });
+*/
 
+app.get( "/buildAll", function( request, response )
+{
+    "use strict";
+    console.log( "buildAll called" );
+    buildAll( response, request.query.pathToPython, request.query.index );
+} );
+
+/*
 app.get('/getBuildConfig', function(request, response) { 'use strict';
     console.log('getBuildConfig called');
 	var options = fs.readFileSync("MarkdownTransformConfig.json", 'utf8');
@@ -130,6 +164,7 @@ app.get('/getBuildConfig', function(request, response) { 'use strict';
 	response.send(options);
     
 });
+*/
 
 app.get('/insertData', function(request, response) { 'use strict';
     var collectionName = request.query.collectionName;
