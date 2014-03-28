@@ -6,8 +6,10 @@ define(['jquery'], function() {'use strict';
     var dataIndex = 0;
     var dataIndexTransform = 0;
     
+    var transformConfigId = "";
+    var optionConfigId = "";
+    
     var collections = [ "MarkdownTransformConfig", "Options" ];
-    var configArray = [];
     
     function AwsUi() {
         $( "#insertData" ).click( insertData );
@@ -25,26 +27,7 @@ define(['jquery'], function() {'use strict';
         //getBuildConfig();
         //getOptions();
     }
-    /*
-    var displayDocument = function( document )
-    {
-        if( typeof document !== "undefined" )
-        {
-            $( "#pathToPython" ).val( document.pathToPython );
-            $( "#copyFrom" ).val( document.copyFrom );
-            $( "#copyTo" ).val( document.copyTo );
-            $( "#filesToCopy" ).val( document.filesToCopy );
-            $( "#pathToConfig" ).val( document.pathToConfig );
-            $( "#reallyWrite" ).val( document.reallyWrite );
-            $( "#bucketName" ).val( document.bucketName );
-            $( "#folderToWalk" ).val( document.folderToWalk );
-            $( "#s3RootFolder" ).val( document.s3RootFolder );
-            $( "#createFolderToWalkOnS3" ).val( document.createFolderToWalkOnS3 );
-            $( "#createIndex" ).val( document.createIndex );
-            $( "#filesToIgnore" ).val( document.filesToIgnore );            
-        }
-    };
-    */
+
     var insertData = function()
     {
         console.log( "Insert Data button!" );
@@ -83,6 +66,8 @@ define(['jquery'], function() {'use strict';
                 dataIndexTransform = data.length-1;
             }
             displayTransformConfig( data[ dataIndexTransform ] );
+            transformConfigId = data[ dataIndexTransform ]._id;
+            console.log( "The transformConfigId is " + transformConfigId );
         } );
     };
     
@@ -101,6 +86,8 @@ define(['jquery'], function() {'use strict';
                 dataIndex = data.length-1;
             }
             displayOptions( data[ dataIndex ] );
+            optionConfigId = data[ dataIndex ]._id;
+            console.log( "The optionConfigId is " + optionConfigId );
         } );
     };
 /*
@@ -156,15 +143,6 @@ define(['jquery'], function() {'use strict';
         };
         return jsonObject;
     };
-/*
-    var copyToS3 = function() {
-        $.getJSON("/copyToS3", {
-            options : JSON.stringify(options[dataIndex])
-        }, function(data) {
-            $("#copyResult").html("Result: " + data.result);
-        });
-    };
-    */
     
     var copyToS3 = function()
     {
