@@ -69,7 +69,7 @@ app.get('/getOptions', function(request, response) {'use strict';
 	options = JSON.parse(options);
 	response.send(options);
 });
-
+/*
 app.get('/listBuckets', function(request, response) {'use strict';
     console.log("ListBuckets called");
     console.log(request.query);
@@ -78,6 +78,18 @@ app.get('/listBuckets', function(request, response) {'use strict';
 	s3Code.loadConfig(options.pathToConfig);
 	s3Code.listBuckets(response, true);
 });
+*/
+
+app.get( "/listBuckets", function( request, response )
+{
+    "use strict";
+    console.log( "listBuckets called" );
+    console.log( request.query );
+    var path = request.query.path;
+    console.log( "listBuckets: ", path );
+    s3Code.loadConfig( path );
+    s3Code.listBuckets( response, true );
+} );
 
 app.get('/copyToS3', function(request, response) {'use strict';
 	console.log(typeof request.query.options);	

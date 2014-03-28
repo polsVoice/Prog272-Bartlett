@@ -240,8 +240,10 @@ define(['jquery'], function() {'use strict';
     };
 
     var listBuckets = function() {
+        var pathToConfig = $( "#pathToConfig" ).val();
+        console.log( "pathToConfig is " + pathToConfig );
         $.getJSON("/listBuckets", {
-            options : JSON.stringify(options[dataIndex])
+            path: pathToConfig
         }, function(data) {
             for (var i = 0; i < data.length; i++) {
                 $("#buckets").append("<li>" + data[i] + "</li>");
