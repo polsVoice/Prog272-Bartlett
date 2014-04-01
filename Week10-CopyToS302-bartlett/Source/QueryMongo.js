@@ -9,6 +9,7 @@ var mongodb = require('mongodb');
 var fs = require('fs');
 var collectionList = require('./CollectionList').CollectionList;
 var loadConfig = require('./LoadConfig.js').loadConfig;
+//var ObjectId = require( "mongodb" ).ObjectId;
 
 var QueryMongo = (function() {
 	'use strict';
@@ -103,6 +104,42 @@ var QueryMongo = (function() {
 
 		});
 	};
+    
+    QueryMongo.prototype.updateCollection = function( response, recordId, update, collectionName )
+    {
+        message( "QueryMongo.updateCollection called: " + collectionName );
+        console.log( update );
+        console.log( "recordId is " + recordId );
+        getDatabase( response, collectionName, function( response, collectionName, db )
+        {
+            var collection = collectionList.getCollectionByName( db, collectionName );
+            if( collection !== null )
+            {
+                collection.update( { "_id": mongodb.ObjectID( recordId ) }, update, 
+                function( err, count )
+                {
+                    if( err )
+                    {
+                        throw err;
+                    }
+                    else
+                    {
+                        response.send(
+                        {
+                            result: "Success"
+                        } );
+                    }
+                } );
+            }
+            else
+            {
+                response.send(
+                {
+                    result: "Could not find the collection"
+                } );
+            }
+        } );
+    };
 
 	QueryMongo.prototype.removeAll = function(response, collectionName) {
 		console.log("QueryMongo.removeAll called");

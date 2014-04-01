@@ -7,13 +7,14 @@ define(['jquery'], function() {'use strict';
     var dataIndexTransform = 0;
     
     var transformConfigId = "";
-    var optionConfigId = "";
+    var optionsConfigId = "";
     
     var collections = [ "MarkdownTransformConfig", "Options" ];
     
     function AwsUi() {
         $( "#insertData" ).click( insertData );
         $( "#readData" ).click( readData );
+        $( "#updateData" ).click( updateData );
         $("#listBuckets").click(listBuckets);
         $("#copyToS3").click(copyToS3);
         $("#getOptions").click(getOptions);
@@ -51,6 +52,23 @@ define(['jquery'], function() {'use strict';
         readOptions();
     };
     
+    var updateData = function()
+    {
+        $.getJSON( "/update",
+                { update: jsonTransform(),
+                    collectionName: collections[ 0 ],
+                    id: transformConfigId
+                },
+                function( data )
+                {
+                    if( data.result === "Success" )
+                    {
+                        console.log( "Update succeeded!" );
+                    }
+                    console.log( data.result );
+                } );
+    };
+    
     var readTransformConfig = function()
     {
         $.getJSON( "/read", 
@@ -86,26 +104,10 @@ define(['jquery'], function() {'use strict';
                 dataIndex = data.length-1;
             }
             displayOptions( data[ dataIndex ] );
-            optionConfigId = data[ dataIndex ]._id;
-            console.log( "The optionConfigId is " + optionConfigId );
+            optionsConfigId = data[ dataIndex ]._id;
+            console.log( "The optionsConfigId is " + optionsConfigId );
         } );
     };
-/*
-    var buildAll = function() {
-        $.getJSON("/buildAll", {
-            options : JSON.stringify(transformOptions),
-            index : dataIndexTransform
-        }, function(result) {
-            $("#buildData").empty();
-            var fileArray = result.data.split("\n");
-            for (var i = 0; i < fileArray.length; i++) {
-                if (fileArray[i].length > 0) {
-                    $("#buildData").append("<li>" + fileArray[i] + "</li>");
-                }
-            }
-        });
-    };
-    */
     
     var buildAll = function()
     {
@@ -127,6 +129,17 @@ define(['jquery'], function() {'use strict';
                         }
                     }
                 } );
+    };
+    
+    var jsonTransform = function()
+    {
+        var jsonObject = {
+            "pathToPython": $( "#pathToPython" ).val(),
+            "copyFrom": $( "#copyFrom" ).val(),
+            "copyTo": $( "#copyTo" ).val(),
+            "filesToCopy": $( "#filesToCopy" ).val()
+        };
+        return jsonObject;
     };
     
     var jsonOptions = function()
@@ -181,18 +194,6 @@ define(['jquery'], function() {'use strict';
             alert(JSON.stringify(a));
         });
     };
-    
-    /*
-    var getOptions = function() {
-        $.getJSON("/getOptions", function(optionsInit) {
-            options = optionsInit;
-            $('#documentCount').html(options.length);
-            displayOptions(options[0]);
-        }).fail(function(a) {
-            alert(JSON.stringify(a));
-        });
-    };
-    */
     
     var forwardTransform = function()
     {
