@@ -2,8 +2,6 @@
  * @author bbartlett
  */
 
-console.log( "It works" );
-
 var milesConvert = {
 	miles: 3,
 	feetPerMile: 5280,
@@ -13,4 +11,4 @@ var milesConvert = {
 	}
 };
 
-console.log( milesConvert.miles + " is " + milesConvert.milesToFeet() + " feet." );
+console.log( milesConvert.miles + " miles is " + milesConvert.milesToFeet() + " feet." );

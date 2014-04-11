@@ -9,7 +9,6 @@ var mongodb = require('mongodb');
 var fs = require('fs');
 var collectionList = require('./CollectionList').CollectionList;
 var loadConfig = require('./LoadConfig.js').loadConfig;
-//var ObjectId = require( "mongodb" ).ObjectId;
 
 var QueryMongo = (function() {
 	'use strict';
